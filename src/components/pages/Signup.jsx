@@ -2,14 +2,22 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import authService from "../../firebase/auth";
 import { FirebaseError } from "firebase/app";
+import { login } from "../../store/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 function Signup() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
   const create = async (data) => {
     setError("");
     try {
-      const userData = authService.createUser(data);
-      console.log("inside try", userData);
+      const userData = await authService.createUser(data);
+      if (userData) {
+        dispatch(login(userData));
+        navigate("/");
+      }
     } catch (error) {
       setError(error.message);
     }

@@ -13,7 +13,7 @@ function Login() {
   const loginUser = async (data) => {
     setError("");
     try {
-      const userData = authService.loginUser(data);
+      const userData = await authService.loginUser(data);
       dispatch(login(userData));
       navigate("/");
     } catch (error) {

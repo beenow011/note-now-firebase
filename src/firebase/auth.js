@@ -19,6 +19,9 @@ import conf from "../conf/conf"
     async createUser({email,password}){
         try {
             const userAccount = await createUserWithEmailAndPassword(this.auth, email, password)
+            if(userAccount){
+                return this.loginUser({email,password});
+            }
             return userAccount;
         } catch (error) {
             throw error;

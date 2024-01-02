@@ -8,7 +8,8 @@ import { logout } from "../store/authSlice";
 function Header() {
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.status);
-  console.log(authStatus);
+  const userData = useSelector((state) => state.userData);
+  console.log(userData);
   const navigate = useNavigate();
   const signoutUser = async () => {
     try {

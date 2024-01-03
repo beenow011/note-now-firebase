@@ -11,7 +11,7 @@ function CreateNotes() {
       }}
     >
       <span className="material-symbols-outlined ">add</span>{" "}
-      <span className="ml-2">create new notes</span>
+      <span className="ml-2">create new Notebook</span>
     </div>
   );
 }

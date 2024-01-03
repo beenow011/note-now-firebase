@@ -9,7 +9,7 @@ function Header() {
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.status);
   const userData = useSelector((state) => state.userData);
-  console.log(userData);
+  // console.log(userData);
   const navigate = useNavigate();
   const signoutUser = async () => {
     try {

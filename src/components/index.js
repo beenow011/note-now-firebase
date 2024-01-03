@@ -5,4 +5,5 @@ import Notes from "./pages/Notes";
 import Header from "./Header";
 import Card from "./Card";
 import CreateNotes from "./CreateNotes";
-export {Home,Login,Signup,Notes,Header,Card,CreateNotes};
+import Notebook from "./pages/Notebook";
+export {Home,Login,Signup,Notes,Header,Card,CreateNotes,Notebook};

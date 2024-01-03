@@ -14,7 +14,7 @@ function Login() {
     setError("");
     try {
       const userData = await authService.loginUser(data);
-      dispatch(login(userData));
+      dispatch(login(userData?.user?.uid));
       navigate("/");
     } catch (error) {
       setError(error.message);

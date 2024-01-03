@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, Login, Notes, Signup } from "./components/index.js";
+import { Home, Login, Notebook, Notes, Signup } from "./components/index.js";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 import Protected from "./components/AuthLayout.jsx";
@@ -38,6 +38,14 @@ const router = createBrowserRouter([
         element: (
           <Protected authentication>
             <Notes />
+          </Protected>
+        ),
+      },
+      {
+        path: "/notebook/:notesId",
+        element: (
+          <Protected authentication>
+            <Notebook />
           </Protected>
         ),
       },

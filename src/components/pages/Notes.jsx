@@ -65,7 +65,7 @@ function Notes() {
           <input
             type="text"
             placeholder="Title"
-            className="p-2 rounded-md w-96 bg-gray-800"
+            className="p-2 rounded-md w-80 md:w-96 bg-gray-800"
             onChange={(e) => {
               setPost({ ...post, title: e.target.value });
             }}

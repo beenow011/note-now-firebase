@@ -41,7 +41,7 @@ function Header() {
     <div className="w-screen bg-blue-900 p-3 flex justify-between">
       <div>
         <Link to="/">
-          <h1 className="text-white p-4 font-mono text-3xl hover:text-green-300">
+          <h1 className="text-white p-4 font-mono text-4xl hover:text-green-300 font-bold">
             Note now
           </h1>
         </Link>

@@ -6,7 +6,7 @@ function Card({ title, notes, date, color, id }) {
   // console.log(id);
   return (
     <div
-      className={`w-96 min-h-36 rounded-md border border-[${color}] m-8 p-6 hover:bg-gray-800 bg-[${color}]`}
+      className={`w-80 md:w-96 min-h-36 rounded-md mx-auto border border-[${color}] m-8 p-6 hover:bg-gray-800 bg-[${color}]`}
       style={{ borderColor: color }}
       onClick={() => navigate(`/notebook/${id}`)}
     >

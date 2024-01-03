@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import service from "../../firebase/config";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { Toaster, toast } from "react-hot-toast";
 
 function Notebook() {
   const [change, setChange] = useState(false);
@@ -31,14 +32,22 @@ function Notebook() {
   }, [notesInfo]);
 
   const handleSave = async () => {
-    const updatedNotes = await service.updateNotes(notesId, {
-      notes,
-      keypoints,
-    });
+    try {
+      const updatedNotes = await service.updateNotes(notesId, {
+        notes,
+        keypoints,
+      });
+      toast.success("Notes saved!");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="p-8">
+      <div>
+        <Toaster />
+      </div>
       <h1 className="text-3xl font-bold">Your Notebook</h1>
       <div className="flex justify-between">
         <h1 className="m-4 p-6 text-5xl" style={{ color: notesInfo?.color }}>

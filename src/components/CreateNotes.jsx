@@ -5,7 +5,7 @@ function CreateNotes() {
   const navigate = useNavigate();
   return (
     <div
-      className="w-96 min-h-36 rounded-md bg-gray-700 m-8 p-6 my-auto hover:bg-gray-900 flex "
+      className="w-80 md:w-96 min-h-36 rounded-md mx-auto bg-gray-700 m-8  p-6 my-auto hover:bg-gray-900 flex "
       onClick={() => {
         navigate("/notes");
       }}

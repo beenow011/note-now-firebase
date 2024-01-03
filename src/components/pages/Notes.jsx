@@ -5,6 +5,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 function Notes() {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const [post, setPost] = useState({ title: "", color: "", description: "" });
   const [activeColor, setActiveColor] = useState(null);
   // const [postId, setPostId] = useState("");
@@ -13,14 +14,18 @@ function Notes() {
   // console.log(uId);
   const createNotes = async () => {
     try {
-      const postCreated = await service.createPost(uId, post);
-      postCreated && console.log(postCreated);
-      if (postCreated) {
-        // console.log("post", postCreated?._key?.path?.segments[1]);
-        const postId = postCreated?._key?.path?.segments[1];
-        // console.log(postId);
-        toast.success("Notebook created");
-        navigate(`/notebook/${postId}`);
+      if (post.color && post.title && post.description) {
+        const postCreated = await service.createPost(uId, post);
+        postCreated && console.log(postCreated);
+        if (postCreated) {
+          // console.log("post", postCreated?._key?.path?.segments[1]);
+          const postId = postCreated?._key?.path?.segments[1];
+          // console.log(postId);
+          toast.success("Notebook created");
+          navigate(`/notebook/${postId}`);
+        }
+      } else {
+        setError("Every field is required*");
       }
     } catch (error) {
       console.log(error.message);
@@ -102,12 +107,13 @@ function Notes() {
         <label className="px-3 text-3xl"> description</label>
         <div>
           <textarea
-            className="p-2 md:ml-10 mt-5 h-[30vw] rounded-md w-96 md:w-[50vw] text-white bg-gray-800 "
+            className="p-2 md:ml-10 mt-5 h-[30vw] rounded-md w-80 md:w-[50vw] text-white bg-gray-800 "
             onChange={(e) => {
               setPost({ ...post, description: e.target.value });
             }}
           ></textarea>
         </div>
+        {error && <p className="text-red-500">{error}</p>}
       </div>
       <button
         className="p-3 h-16 bg-blue-800 rounded-lg mx-10 my-6 hover:bg-blue-900"

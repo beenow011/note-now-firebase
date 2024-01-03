@@ -38,7 +38,7 @@ function Home() {
       <Banner />
       <div className="p-5">
         <h1 className="text-3xl font-bold px-5">Scribe your learning</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
+        <div className="flex flex-wrap mt-4 ">
           <CreateNotes />
           {userPosts?.map((note, i) => (
             <Card

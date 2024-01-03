@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: (
-          <Protected authentication>
+          <Protected authentication={false}>
             <Home />
           </Protected>
         ),

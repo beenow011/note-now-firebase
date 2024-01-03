@@ -6,45 +6,66 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 function Notebook() {
-  const [value, setValue] = useState("");
-  const [keyNotes, setKeyNotes] = useState("");
+  const [change, setChange] = useState(false);
+  const [notes, setNotes] = useState("");
+  const [keypoints, setKeyPoints] = useState("");
   const { notesId } = useParams();
-  const [notes, setNotes] = useState();
+  const [notesInfo, setNotesInfo] = useState();
   useEffect(() => {
     service
       .getAllPosts()
       .then((posts) => {
         posts.forEach((doc) => {
           if (notesId === doc.id) {
-            setNotes(doc.data());
+            setNotesInfo(doc.data());
           }
         });
       })
       .catch((error) => console.log(error));
   }, []);
+  useEffect(() => {
+    if (notesInfo) {
+      setNotes(notesInfo?.notes);
+      setKeyPoints(notesInfo?.keypoints);
+    }
+  }, [notesInfo]);
+
+  const handleSave = async () => {
+    const updatedNotes = await service.updateNotes(notesId, {
+      notes,
+      keypoints,
+    });
+  };
 
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold">Your Notebook</h1>
       <div className="flex justify-between">
-        <h1 className="m-4 p-6 text-5xl" style={{ color: notes?.color }}>
-          {notes?.title}
+        <h1 className="m-4 p-6 text-5xl" style={{ color: notesInfo?.color }}>
+          {notesInfo?.title}
         </h1>
-        <p className="m-4 p-6 text-green-400">{notes?.date}</p>
+        <p className="m-4 p-6 text-green-400">{notesInfo?.date}</p>
       </div>
       <div
         className="w-full p-6  rounded-md"
-        style={{ backgroundColor: notes?.color }}
+        style={{ backgroundColor: notesInfo?.color }}
       >
-        {notes?.description}
+        {notesInfo?.description}
       </div>
-      <div className="w-full  lg:flex mt-4">
+      <button
+        className="p-3 my-8 mx-4 rounded-md hover:border"
+        style={{ backgroundColor: notesInfo?.color }}
+        onClick={handleSave}
+      >
+        Save
+      </button>
+      <div className="w-full  lg:flex ">
         <div className="lg:w-3/4  p-5">
           <h1 className="text-2xl">Welcome back scribe..!</h1>
           <ReactQuill
             theme="snow"
-            value={value}
-            onChange={setValue}
+            value={notes}
+            onChange={setNotes}
             className=" "
             style={{ color: notes?.color }}
             modules={{
@@ -63,8 +84,8 @@ function Notebook() {
           <h1 className="text-2xl">key notes..!</h1>
           <ReactQuill
             theme="snow"
-            value={keyNotes}
-            onChange={setKeyNotes}
+            value={keypoints}
+            onChange={setKeyPoints}
             className="rounded-md"
             style={{ color: notes?.color }}
           />

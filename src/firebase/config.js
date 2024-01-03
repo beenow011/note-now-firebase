@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 // import { getDatabase , ref, set, onValue  } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc,getDocs  } from "firebase/firestore"; 
+import { collection, addDoc,getDocs ,doc , updateDoc } from "firebase/firestore"; 
 
 import conf from "../conf/conf";
 const currentDate = new Date();
@@ -21,7 +21,7 @@ export class Services{
                 uId,
                 title,
                 color,
-                description,
+                description,notes:"",keypoints:"",
                 date:`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`
               });
               return docRef;
@@ -35,6 +35,19 @@ export class Services{
             return querySnapshot;
         }
         catch(error){
+            throw error;
+        }
+     }
+
+     async updateNotes(id,{notes,keypoints}){
+        try{
+            console.log(    notes,keypoints)
+            const userDocRef = doc(this.db, "users", id);
+            return await updateDoc(userDocRef, {
+                notes,
+                keypoints,
+              });
+        }catch(error){
             throw error;
         }
      }

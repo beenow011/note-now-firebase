@@ -6,6 +6,7 @@ import { login } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function Signup() {
+  const [visibility, setVisibility] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -63,12 +64,23 @@ function Signup() {
         </label>
         <input
           placeholder="Password"
-          type="password"
+          type={visibility ? "password" : "text"}
           className="p-2 text-black"
           {...register("password", {
             required: true,
           })}
         />
+        <div className="mt-2">
+          <label htmlFor="" className="mt-2">
+            {visibility ? "show" : "hide"}
+          </label>
+          <input
+            type="checkbox"
+            className="cursor-default mx-2 rounded-full "
+            onClick={() => setVisibility((state) => !state)}
+          />
+        </div>
+
         {error && (
           <p className="text-red-500 bg-white m-1 rounded-md text-center">
             {error}

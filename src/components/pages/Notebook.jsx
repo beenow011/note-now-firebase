@@ -109,6 +109,7 @@ function Notebook() {
             onChange={setKeyPoints}
             className="rounded-md"
             style={{ color: notesInfo?.color }}
+            spellCheck={false}
           />
         </div>
         <div className="lg:w-3/4  px-5 py-2">
@@ -127,6 +128,7 @@ function Notebook() {
                 ["clean"],
               ],
             }}
+            spellCheck={false}
             ref={(el) => (quillRef = el)}
           />
         </div>

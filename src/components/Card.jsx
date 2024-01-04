@@ -11,7 +11,7 @@ function Card({ title, notes, date, color, id }) {
       onClick={() => navigate(`/notebook/${id}`)}
     >
       <div className="flex justify-between">
-        <h1 className="text-2xl ">{title}</h1>
+        <h1 className="text-2xl overflow-hidden">{title}</h1>
         <p className="m-auto text-green-400">{date}</p>
       </div>
       <div className="mt-10">

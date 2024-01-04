@@ -22,25 +22,27 @@ function Home() {
           Posts.forEach((doc) => {
             const data = doc.data();
             const id = doc.id;
-            setAllPosts((prevAllPosts) => [...prevAllPosts, data]);
-            setPostid((prev) => [...prev, id]);
+            if (data.uId === userId) {
+              setAllPosts((prevAllPosts) => [...prevAllPosts, data]);
+              setPostid((prev) => [...prev, id]);
+            }
           })
         // console.log(Posts)
       )
       .catch((error) => console.log(error));
   }, []);
 
-  const userPosts = allPosts.filter((post) => post.uId === userId);
-  console.log(userPosts);
+  // const userPosts = allPosts.filter((post) => post.uId === userId);
+  console.log(allPosts);
 
   return userStatus ? (
     <>
       <Banner />
       <div className="p-5">
         <h1 className="text-3xl font-bold px-5">Scribe your learning</h1>
-        <div className="flex flex-wrap mt-4 ">
+        <div className="flex flex-wrap justify-start mt-4 ">
           <CreateNotes />
-          {userPosts?.map((note, i) => (
+          {allPosts?.map((note, i) => (
             <Card
               title={note.title}
               notes={note.description}

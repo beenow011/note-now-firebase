@@ -7,7 +7,6 @@ import "react-quill/dist/quill.snow.css";
 import { Toaster, toast } from "react-hot-toast";
 
 function Notebook() {
-  const [change, setChange] = useState(false);
   const [notes, setNotes] = useState("");
   const [keypoints, setKeyPoints] = useState("");
   const { notesId } = useParams();
@@ -33,27 +32,50 @@ function Notebook() {
 
   const handleSave = async () => {
     try {
-      const updatedNotes = await service.updateNotes(notesId, {
-        notes,
-        keypoints,
-      });
-      toast.success("Notes saved!");
+      if (notes || keypoints) {
+        const updatedNotes = await service.updateNotes(notesId, {
+          notes,
+          keypoints,
+        });
+        toast.success("Notes saved!");
+      } else {
+        toast.error("notes is empty");
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
+  let quillRef;
+  const handleSaveToDevice = () => {
+    if (notes || keypoints) {
+      const plainText = quillRef?.getEditor().getText();
+      const blob = new Blob([plainText], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "my_document.txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } else {
+      toast.error("notes is empty");
+    }
+  };
   return (
     <div className="p-8">
       <div>
         <Toaster />
       </div>
       <h1 className="text-3xl font-bold">Your Notebook</h1>
-      <div className="flex justify-between">
-        <h1 className="m-4 p-6 text-5xl" style={{ color: notesInfo?.color }}>
+      <div className="flex justify-between w-full flex-wrap">
+        <h1
+          className="my-4 md:m-4 md:p-6 text-2xl md:text-5xl"
+          style={{ color: notesInfo?.color }}
+        >
           {notesInfo?.title}
         </h1>
-        <p className="m-4 p-6 text-green-400">{notesInfo?.date}</p>
+        <p className=" my-4 md:m-4 md:p-6 text-green-400">{notesInfo?.date}</p>
       </div>
       <div
         className="w-full p-6  rounded-md"
@@ -61,22 +83,41 @@ function Notebook() {
       >
         {notesInfo?.description}
       </div>
-      <button
-        className="p-3 my-8 mx-4 rounded-md hover:border"
-        style={{ backgroundColor: notesInfo?.color }}
-        onClick={handleSave}
-      >
-        Save
-      </button>
+      <div className="flex justify-between">
+        <button
+          className="p-3 my-8 mx-4 rounded-md hover:shadow-white shadow"
+          style={{ backgroundColor: notesInfo?.color }}
+          onClick={handleSave}
+        >
+          Save
+        </button>
+        <button
+          className="p-3 my-8 mx-4 rounded-md hover:shadow-white shadow"
+          style={{ backgroundColor: notesInfo?.color }}
+          onClick={handleSaveToDevice}
+        >
+          download notes
+        </button>
+      </div>
       <div className="w-full  lg:flex ">
-        <div className="lg:w-3/4  p-5">
+        <div className="lg:w-1/4 px-5 py-2 text-xl ">
+          {" "}
+          <h1 className="text-2xl">key notes..!</h1>
+          <ReactQuill
+            theme="snow"
+            value={keypoints}
+            onChange={setKeyPoints}
+            className="rounded-md"
+            style={{ color: notesInfo?.color }}
+          />
+        </div>
+        <div className="lg:w-3/4  px-5 py-2">
           <h1 className="text-2xl">Welcome back scribe..!</h1>
           <ReactQuill
             theme="snow"
             value={notes}
             onChange={setNotes}
             className=" "
-            style={{ color: notes?.color }}
             modules={{
               toolbar: [
                 [{ header: [1, 2, false] }],
@@ -86,17 +127,7 @@ function Notebook() {
                 ["clean"],
               ],
             }}
-          />
-        </div>
-        <div className="lg:w-1/4 p-5 text-xl ">
-          {" "}
-          <h1 className="text-2xl">key notes..!</h1>
-          <ReactQuill
-            theme="snow"
-            value={keypoints}
-            onChange={setKeyPoints}
-            className="rounded-md"
-            style={{ color: notes?.color }}
+            ref={(el) => (quillRef = el)}
           />
         </div>
       </div>

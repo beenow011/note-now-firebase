@@ -64,7 +64,7 @@ function Header() {
             <li>
               <button
                 onClick={() => navigate("/login")}
-                className="text-white font-mono  p-4 hover:text-green-400"
+                className="text-white font-mono  p-6 hover:text-green-400"
               >
                 login
               </button>
@@ -74,7 +74,7 @@ function Header() {
             <li>
               <button
                 onClick={() => navigate("/signup")}
-                className="text-white font-mono  p-4 hover:text-green-400"
+                className="text-white font-mono  p-6 hover:text-green-400"
               >
                 signup
               </button>
@@ -84,7 +84,7 @@ function Header() {
             <li>
               <button
                 onClick={signoutUser}
-                className="text-white font-mono  p-4 hover:text-green-400"
+                className="text-white font-mono   p-6 hover:text-green-400"
               >
                 logout
               </button>

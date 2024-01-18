@@ -34,6 +34,14 @@ function Home() {
 
   // const userPosts = allPosts.filter((post) => post.uId === userId);
   console.log(allPosts);
+  const sortedArray = allPosts?.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    return dateB - dateA;
+  });
+
+  console.log(sortedArray);
 
   return userStatus ? (
     <>
@@ -42,7 +50,7 @@ function Home() {
         <h1 className="text-3xl font-bold px-5">Scribe your learning</h1>
         <div className="flex flex-wrap justify-start mt-4 ">
           <CreateNotes />
-          {allPosts?.map((note, i) => (
+          {sortedArray?.map((note, i) => (
             <Card
               title={note.title}
               notes={note.description}

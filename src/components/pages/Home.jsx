@@ -38,8 +38,10 @@ function Home() {
   useEffect(() => {
     // setAllPosts(allPosts);
     setSearchPosts(allPosts);
-    const filteredData = allPosts.filter((post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredData = allPosts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchPosts(filteredData);
   }, [searchTerm, allPosts]);

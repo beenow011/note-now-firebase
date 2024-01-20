@@ -68,7 +68,7 @@ function Home() {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-64 md:w-96 p-1 md:p-2 m-3 z-10 ml-6 text-black"
         />
-        <div className="flex flex-wrap justify-start mt-4 ">
+        <div className="flex flex-wrap justify-start justify-items-start mt-4 ">
           <CreateNotes />
           {SearchPosts?.map((note, i) => (
             <Card

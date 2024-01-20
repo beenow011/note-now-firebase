@@ -6,11 +6,15 @@ import service from "../../firebase/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import bg from "../../assets/bg.png";
+
 // import Card from "../Card";
 function Home() {
   // console.log(notes);
   const navigate = useNavigate();
   const [allPosts, setAllPosts] = useState([]);
+  const [SearchPosts, setSearchPosts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [postId, setPostid] = useState([]);
   const userStatus = useSelector((state) => state.status);
   const userId = useSelector((state) => state.userData);
@@ -31,6 +35,14 @@ function Home() {
       )
       .catch((error) => console.log(error));
   }, []);
+  useEffect(() => {
+    // setAllPosts(allPosts);
+    setSearchPosts(allPosts);
+    const filteredData = allPosts.filter((post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchPosts(filteredData);
+  }, [searchTerm, allPosts]);
 
   // const userPosts = allPosts.filter((post) => post.uId === userId);
   // console.log(allPosts);
@@ -48,9 +60,15 @@ function Home() {
       <Banner />
       <div className="p-5">
         <h1 className="text-3xl font-bold px-5">Scribe your learning</h1>
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-64 md:w-96 p-1 md:p-2 m-3 z-10 ml-6 text-black"
+        />
         <div className="flex flex-wrap justify-start mt-4 ">
           <CreateNotes />
-          {allPosts?.map((note, i) => (
+          {SearchPosts?.map((note, i) => (
             <Card
               title={note.title}
               notes={note.description}

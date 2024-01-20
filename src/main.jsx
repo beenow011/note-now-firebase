@@ -7,6 +7,7 @@ import { Home, Login, Notebook, Notes, Signup } from "./components/index.js";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 import Protected from "./components/AuthLayout.jsx";
+import Lib from "./components/Lib.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
           </Protected>
         ),
       },
+      // {
+      //   path: "/library",
+      //   element: (
+      //     <Protected authentication>
+      //       <Lib />
+      //     </Protected>
+      //   ),
+      // },
       {
         path: "/notebook/:notesId",
         element: (

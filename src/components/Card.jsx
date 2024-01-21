@@ -16,7 +16,9 @@ function Card({ title, notes, date, color, id }) {
         <p className="m-auto text-green-400">{date}</p>
       </div>
       <div className="mt-10">
-        <p>{notes > 50 ? notes.subString(0, 50) : notes}.....</p>
+        <p className=" h-10">
+          {notes.length > 50 ? notes.substring(0, 50) : notes}
+        </p>
       </div>
     </div>
   );

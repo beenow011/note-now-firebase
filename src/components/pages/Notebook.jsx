@@ -63,14 +63,14 @@ function Notebook() {
     }
   };
   return (
-    <div className="p-8">
+    <div className="p-8 font-petch">
       <div>
         <Toaster />
       </div>
       <h1 className="text-3xl font-bold">Your Notebook</h1>
       <div className="flex justify-between w-full flex-wrap">
         <h1
-          className="my-4 md:m-4 md:p-6 text-2xl md:text-5xl"
+          className="my-4 md:m-4 md:p-6 text-2xl md:text-5xl font-poppins"
           style={{ color: notesInfo?.color }}
         >
           {notesInfo?.title}
@@ -78,7 +78,7 @@ function Notebook() {
         <p className=" my-4 md:m-4 md:p-6 text-green-400">{notesInfo?.date}</p>
       </div>
       <div
-        className="w-full p-6  rounded-md border"
+        className="w-full p-6  rounded-md border "
         style={{ borderColor: notesInfo?.color }}
       >
         {notesInfo?.description}
@@ -99,8 +99,8 @@ function Notebook() {
           download notes
         </button>
       </div>
-      <div className="w-full  lg:flex ">
-        <div className="lg:w-1/4 px-5 py-2 text-xl ">
+      <div className="w-full  lg:flex flex-col ">
+        <div className="lg:w-1/4 px-5 py-2 text-xl  ">
           {" "}
           <h1 className="text-2xl">key notes..!</h1>
           <ReactQuill
@@ -113,8 +113,10 @@ function Notebook() {
           />
         </div>
         <div
-          className="lg:w-3/4  px-5 py-2 "
-          style={{ backgroundColor: `${notesInfo?.color}90` }}
+          className="lg:w-3/4 mt-10 mx-auto  px-5 py-2 rounded-md shadow-lg shadow-black"
+          style={{
+            backgroundColor: `${notesInfo?.color}90`,
+          }}
         >
           <h1 className="text-2xl">Welcome back scribe..!</h1>
           <ReactQuill

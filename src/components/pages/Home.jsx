@@ -66,12 +66,14 @@ function Home() {
       <Banner />
       <div className="p-5">
         <h1 className="text-3xl font-bold px-5">Scribe your learning</h1>
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-64 md:w-96 p-1 md:p-2 m-3 z-10 ml-6 text-black"
-        />
+        <div className="flex justify-center items-center">
+          <input
+            type="text"
+            placeholder="Search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-64 md:w-96 p-1 md:p-2 m-3 z-10 ml-6 text-black mx-auto"
+          />
+        </div>
         <div className="flex flex-wrap justify-start justify-items-start mt-4 ">
           <CreateNotes />
           {SearchPosts?.map((note, i) => (

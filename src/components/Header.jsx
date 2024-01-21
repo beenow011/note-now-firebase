@@ -38,7 +38,7 @@ function Header() {
     },
   ];
   return (
-    <div className="w-screen bg-blue-900 p-3 flex justify-between">
+    <div className="w-screen bg-gradient-to-r from-blue-700 via-blue-800 to-gray-900 p-3 flex justify-between">
       <div>
         <Link to="/">
           <h1 className="text-white p-4 font-mono text-4xl hover:text-green-300 font-bold">

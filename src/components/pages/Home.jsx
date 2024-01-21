@@ -12,9 +12,10 @@ function Home() {
   // console.log(notes);
   const navigate = useNavigate();
   const [allPosts, setAllPosts] = useState([]);
-  const [SearchPosts, setSearchPosts] = useState([]);
+  const [SearchPosts, setSearchPosts] = useState([{}]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [notesAndId, setNotesAndId] = useState([{}]);
+  const [sortedArray, setSortedArray] = useState({});
   const [postId, setPostid] = useState([]);
   const userStatus = useSelector((state) => state.status);
   const userId = useSelector((state) => state.userData);
@@ -27,8 +28,7 @@ function Home() {
             const data = doc.data();
             const id = doc.id;
             if (data.uId === userId) {
-              setAllPosts((prevAllPosts) => [...prevAllPosts, data]);
-              setPostid((prev) => [...prev, id]);
+              setNotesAndId((prev) => [...prev, { notes: data, id: id }]);
             }
           })
         // console.log(Posts)
@@ -37,25 +37,29 @@ function Home() {
   }, []);
   useEffect(() => {
     // setAllPosts(allPosts);
-    setSearchPosts(allPosts);
-    const filteredData = allPosts.filter(
+    setSearchPosts(notesAndId);
+    const filteredData = notesAndId.filter(
       (post) =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.description.toLowerCase().includes(searchTerm.toLowerCase())
+        post.notes?.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.notes?.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchPosts(filteredData);
-  }, [searchTerm, allPosts]);
+  }, [searchTerm, notesAndId]);
+  // console.log(SearchPosts);
 
-  // const userPosts = allPosts.filter((post) => post.uId === userId);
   // console.log(allPosts);
-  // const sortedArray = allPosts?.sort((a, b) => {
-  //   const dateA = new Date(a.date);
-  //   const dateB = new Date(b.date);
+  useEffect(() => {
+    setSortedArray(
+      SearchPosts?.sort((a, b) => {
+        const dateA = new Date(a.notes?.date);
+        const dateB = new Date(b.notes?.date);
 
-  //   return dateB - dateA;
-  // });
+        return dateB - dateA;
+      })
+    );
+  }, [SearchPosts]);
 
-  // console.log(sortedArray);
+  // console.log("sorted", sortedArray);
 
   return userStatus ? (
     <>
@@ -72,12 +76,12 @@ function Home() {
           <CreateNotes />
           {SearchPosts?.map((note, i) => (
             <Card
-              title={note.title}
-              notes={note.description}
-              date={note.date}
-              color={note.color}
+              title={note.notes?.title}
+              notes={note.notes?.description}
+              date={note.notes?.date}
+              color={note.notes?.color}
               key={i}
-              id={postId[i]}
+              id={note.id}
             />
           ))}
         </div>

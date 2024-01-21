@@ -78,8 +78,8 @@ function Notebook() {
         <p className=" my-4 md:m-4 md:p-6 text-green-400">{notesInfo?.date}</p>
       </div>
       <div
-        className="w-full p-6  rounded-md"
-        style={{ backgroundColor: notesInfo?.color }}
+        className="w-full p-6  rounded-md border"
+        style={{ borderColor: notesInfo?.color }}
       >
         {notesInfo?.description}
       </div>
@@ -112,7 +112,10 @@ function Notebook() {
             spellCheck={false}
           />
         </div>
-        <div className="lg:w-3/4  px-5 py-2">
+        <div
+          className="lg:w-3/4  px-5 py-2 "
+          style={{ backgroundColor: `${notesInfo?.color}90` }}
+        >
           <h1 className="text-2xl">Welcome back scribe..!</h1>
           <ReactQuill
             theme="snow"

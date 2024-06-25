@@ -35,13 +35,17 @@ function Home() {
       )
       .catch((error) => console.log(error));
   }, []);
+  console.log(notesAndId);
   useEffect(() => {
     // setAllPosts(allPosts);
     setSearchPosts(notesAndId);
     const filteredData = notesAndId.filter(
       (post) =>
         post.notes?.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.notes?.description.toLowerCase().includes(searchTerm.toLowerCase())
+        post.notes?.description
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        post.notes?.keypoints.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchPosts(filteredData);
   }, [searchTerm, notesAndId]);

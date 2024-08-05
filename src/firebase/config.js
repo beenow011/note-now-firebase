@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 // import { getDatabase , ref, set, onValue  } from "firebase/database";
-import { getFirestore } from "firebase/firestore";
+import { deleteDoc, getFirestore } from "firebase/firestore";
 import { collection, addDoc, getDocs, doc, updateDoc } from "firebase/firestore";
 
 import conf from "../conf/conf";
@@ -64,6 +64,19 @@ export class Services {
             throw error;
         }
     }
+    async deleteNotes(id) {
+        try {
+            const userDocRef = doc(this.db, "users", id);
+
+            // Use deleteDoc and await the promise
+            await deleteDoc(userDocRef);
+
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    }
+
 }
 
 const service = new Services();

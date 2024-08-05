@@ -55,38 +55,33 @@ function Notes() {
   ];
   // console.log(post);
   return (
-    <div className="p-5 md:flex justify-center">
-      <div>
+    <div className="p-5 md:flex justify-center items-center min-h-screen bg-gray-900">
+      <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-full md:w-4/5 animate-fadeIn">
         <Toaster />
-      </div>
-      <div className="p-6 ">
-        <div>
-          <label className="px-3 text-3xl">Title</label>
+
+        <div className="mb-4">
+          <label className="text-3xl text-white font-semibold">Title</label>
           <input
             type="text"
             placeholder="Title"
-            className="p-2 rounded-md w-80 md:w-96 bg-gray-800"
-            onChange={(e) => {
-              setPost({ ...post, title: e.target.value });
-            }}
+            className="p-3 mt-2 rounded-md w-full bg-gray-700 text-white placeholder-gray-400 transition-transform transform hover:scale-105"
+            onChange={(e) => setPost({ ...post, title: e.target.value })}
           />
         </div>
-        <div className="mt-5 mb-5 ">
-          <label className="px-3 text-3xl">Theme</label>
-          {/* <input
-            type="color"
-            placeholder="color"
-            className="p-2 rounded-md bg-red-300 text-white"
-            onChange={(e) => {
-              setPost({ ...post, color: e.target.value });
-            }}
-          /> */}
-          <p className="px-3">(select the color)</p>
-          <div className="flex flex-wrap">
+
+        <div className="mb-4">
+          <label className="text-3xl text-white font-semibold">Theme</label>
+          <p className="text-white">Select the color</p>
+          <div className="flex flex-wrap mt-2">
             {colors.map((color) => (
               <div
+                key={color.color}
                 style={{ backgroundColor: color.code }}
-                className={`p-3 m-2 rounded-md border-2 border-${activeColor} cursor-pointer`}
+                className={`p-4 m-2 rounded-md cursor-pointer border-2 ${
+                  activeColor?.code === color.code
+                    ? "border-white"
+                    : "border-transparent"
+                } transition-transform transform hover:scale-105`}
                 onClick={() => {
                   setActiveColor(color);
                   setPost({ ...post, color: color.code });
@@ -96,31 +91,35 @@ function Notes() {
               </div>
             ))}
           </div>
-          <p>Selected color</p>
+          <p className="mt-2 text-white">Selected color</p>
           <div
-            className="p-3 m-2 rounded-md  cursor-pointer"
+            className="p-4 mt-2 rounded-md"
             style={{ backgroundColor: activeColor?.code }}
           >
             {activeColor?.color}
           </div>
         </div>
-        <label className="px-3 text-3xl"> description</label>
-        <div>
+
+        <div className="mb-4">
+          <label className="text-3xl text-white font-semibold">
+            Description
+          </label>
           <textarea
-            className="p-2 md:ml-10 mt-5 h-[30vw] rounded-md w-80 md:w-[50vw] text-white bg-gray-800 "
-            onChange={(e) => {
-              setPost({ ...post, description: e.target.value });
-            }}
+            className="p-3 mt-2 rounded-md w-full h-40 bg-gray-700 text-white placeholder-gray-400 transition-transform transform hover:scale-105"
+            placeholder="Description"
+            onChange={(e) => setPost({ ...post, description: e.target.value })}
           ></textarea>
         </div>
+
         {error && <p className="text-red-500">{error}</p>}
+
+        <button
+          className="w-full p-4 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105"
+          onClick={createNotes}
+        >
+          Save
+        </button>
       </div>
-      <button
-        className="p-3 h-16 bg-blue-800 rounded-lg mx-10 my-6 hover:bg-blue-900"
-        onClick={createNotes}
-      >
-        Save
-      </button>
     </div>
   );
 }

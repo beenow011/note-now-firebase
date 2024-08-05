@@ -52,11 +52,7 @@ const router = createBrowserRouter([
       // },
       {
         path: "/notebook/:notesId",
-        element: (
-          <Protected authentication>
-            <Notebook />
-          </Protected>
-        ),
+        element: <Notebook />,
       },
     ],
   },

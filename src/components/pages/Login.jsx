@@ -5,6 +5,7 @@ import { FirebaseError } from "firebase/app";
 import { login } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 function Login() {
   const [visibility, setVisibility] = useState(true);
   const navigate = useNavigate();
@@ -22,60 +23,63 @@ function Login() {
     }
   };
   return (
-    <div>
-      <div className="w-96  border rounded-md m-auto mt-10 bg-gray-800 ">
-        <h1 className="text-white font-mono text-4xl text-center pt-8">
+    <div className="flex justify-center items-center min-h-screen bg-gray-900">
+      <div className="w-full max-w-md border rounded-lg p-6 bg-gray-800 shadow-lg">
+        <h1 className="text-white font-mono text-4xl text-center pt-4 mb-6">
           Log in
         </h1>
-        <form action="submit" className=" flex flex-col justify-center p-4">
-          <label htmlFor="" className="mt-2">
-            Email
+        <form className="flex flex-col" onSubmit={handleSubmit(loginUser)}>
+          <label htmlFor="email" className="text-white flex items-center mt-2">
+            <FaEnvelope className="mr-2" /> Email
           </label>
           <input
             placeholder="Email"
             type="email"
-            className="p-2 text-black"
+            className="p-2 mt-2 rounded-md text-black"
             {...register("email", {
-              required: true,
-              validate: {
-                matchPattern: (value) =>
-                  /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
-                  "Email address must be a valid address",
+              required: "Email is required",
+              pattern: {
+                value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                message: "Invalid email address",
               },
             })}
           />
 
-          <label htmlFor="" className="mt-2">
-            Password
+          <label
+            htmlFor="password"
+            className="text-white flex items-center mt-4"
+          >
+            <FaLock className="mr-2" /> Password
           </label>
-
           <input
             placeholder="Password"
             type={visibility ? "password" : "text"}
-            className="p-2 text-black"
+            className="p-2 mt-2 rounded-md text-black"
             {...register("password", {
-              required: true,
+              required: "Password is required",
             })}
           />
-          <div className="mt-2">
-            <label htmlFor="" className="mt-2">
-              {visibility ? "show" : "hide"}
-            </label>
+
+          <div className="flex items-center mt-4">
             <input
               type="checkbox"
-              className="cursor-default mx-2 rounded-full "
+              className="cursor-pointer mx-2 rounded-full"
               onClick={() => setVisibility((state) => !state)}
             />
+            <label htmlFor="visibility" className="text-white cursor-pointer">
+              {visibility ? "Show Password" : "Hide Password"}
+            </label>
           </div>
 
           {error && (
-            <p className="text-red-500 bg-white m-1 rounded-md text-center">
+            <p className="text-red-500 bg-white m-2 rounded-md text-center p-2">
               {error}
             </p>
           )}
+
           <button
-            className="p-3 bg-blue-800 mt-9 hover:bg-black"
-            onClick={handleSubmit(loginUser)}
+            type="submit"
+            className="p-3 mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md transition duration-300"
           >
             Log in
           </button>

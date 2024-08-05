@@ -38,55 +38,43 @@ function Header() {
     },
   ];
   return (
-    <div className="w-screen bg-gradient-to-r from-blue-700 via-blue-800 to-gray-900 p-3 flex justify-between">
+    <div className=" bg-gradient-to-r from-blue-700 via-blue-800 to-gray-900 p-4 flex justify-between items-center shadow-lg">
       <div>
         <Link to="/">
-          <h1 className="text-white p-4 font-mono text-4xl hover:text-green-300 font-bold">
-            Note now
+          <h1 className="text-white text-3xl font-mono font-bold hover:text-green-300 transition-colors">
+            Note Now
           </h1>
         </Link>
       </div>
       <nav>
-        <ul className="flex">
-          {/* {navItems.map((item, i) =>
-            item.auth === authStatus ? (
-              <li key={i}>
+        <ul className="flex space-x-4">
+          {!authStatus && (
+            <>
+              <li>
                 <button
-                  onClick={() => navigate(item.path)}
-                  className="text-white font-mono  p-4 hover:text-green-400"
+                  onClick={() => navigate("/login")}
+                  className="text-white font-mono text-lg px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
                 >
-                  {item.name}
+                  Login
                 </button>
               </li>
-            ) : null
-          )} */}
-          {!authStatus && (
-            <li>
-              <button
-                onClick={() => navigate("/login")}
-                className="text-white font-mono  p-6 hover:text-green-400"
-              >
-                login
-              </button>
-            </li>
-          )}
-          {!authStatus && (
-            <li>
-              <button
-                onClick={() => navigate("/signup")}
-                className="text-white font-mono  p-6 hover:text-green-400"
-              >
-                signup
-              </button>
-            </li>
+              <li>
+                <button
+                  onClick={() => navigate("/signup")}
+                  className="text-white font-mono text-lg px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                >
+                  Signup
+                </button>
+              </li>
+            </>
           )}
           {authStatus && (
             <li>
               <button
                 onClick={signoutUser}
-                className="text-white font-mono   p-6 hover:text-green-400"
+                className="text-white font-mono text-lg px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
               >
-                logout
+                Logout
               </button>
             </li>
           )}

@@ -170,12 +170,13 @@ function Notebook() {
             theme="snow"
             value={keypoints}
             onChange={setKeyPoints}
-            className="rounded-lg border border-gray-900"
+            className="rounded-lg border border-white"
             style={{
               color: notesInfo?.color,
-              backgroundColor: "#d0d0d0",
+              backgroundColor: "black",
               padding: "10px",
               minHeight: "200px",
+              opacity: 0.8,
             }}
             spellCheck={false}
             readOnly={!userStatus}
@@ -184,7 +185,7 @@ function Notebook() {
           />
         </div>
         <div
-          className=" mt-10 lg:mt-0 lg:ml-8 p-5 rounded-lg shadow-lg"
+          className=" mt-10 lg:mt-0  p-5 rounded-lg shadow-lg"
           style={{
             backgroundColor: `${notesInfo?.color}90`,
           }}
@@ -198,9 +199,10 @@ function Notebook() {
             className="rounded-lg border border-gray-300"
             style={{
               color: notesInfo?.color,
+              backgroundColor: "black",
               padding: "10px",
-              backgroundColor: "#d0d0d0",
               minHeight: "200px",
+              opacity: 0.8,
             }}
             spellCheck={false}
             readOnly={!userStatus}

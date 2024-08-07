@@ -166,26 +166,28 @@ function Notebook() {
           }}
         >
           <h1 className="text-2xl mb-4">Key Points</h1>
-          <ReactQuill
-            theme="snow"
-            value={keypoints}
-            onChange={setKeyPoints}
-            className="rounded-lg border border-white"
-            style={{
-              color: notesInfo?.color,
-              backgroundColor: "black",
-              padding: "10px",
-              minHeight: "200px",
-              opacity: 0.8,
-            }}
-            spellCheck={false}
-            readOnly={!userStatus}
-            modules={modules}
-            formats={formats}
-          />
+          <div>
+            <ReactQuill
+              theme="snow"
+              value={keypoints}
+              onChange={setKeyPoints}
+              className=" rounded-lg border border-white"
+              style={{
+                color: notesInfo?.color,
+                backgroundColor: "black",
+                padding: "10px",
+                minHeight: "200px",
+                opacity: 0.8,
+              }}
+              spellCheck={false}
+              readOnly={!userStatus}
+              modules={modules}
+              formats={formats}
+            />
+          </div>
         </div>
         <div
-          className=" mt-10 lg:mt-0  p-5 rounded-lg shadow-lg"
+          className="quill-container mt-10 lg:mt-0  p-5 rounded-lg shadow-lg"
           style={{
             backgroundColor: `${notesInfo?.color}90`,
           }}
@@ -196,7 +198,7 @@ function Notebook() {
             theme="snow"
             value={notes}
             onChange={setNotes}
-            className="rounded-lg border border-gray-300"
+            className="rounded-lg quill-editor border border-gray-300"
             style={{
               color: notesInfo?.color,
               backgroundColor: "black",

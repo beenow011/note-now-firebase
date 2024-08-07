@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Ensure this CSS is included in your global styles or component-specific styles */
+.quill-container .ql-toolbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: rgb(194, 177, 177);
+    z-index: 1000; /* Ensure toolbar is above other content */
+  }
+  
+  .quill-editor {
+    margin-top: 50px; /* Adjust based on toolbar height to avoid overlap */
+  }
+  

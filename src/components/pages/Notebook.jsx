@@ -187,7 +187,7 @@ function Notebook() {
           </div>
         </div>
         <div
-          className="quill-container h-[90vh] overflow-scroll mt-10 lg:mt-0 pb-12 p-5 rounded-lg shadow-lg"
+          className="quill-container  mt-10 lg:mt-0 pb-12 p-5 rounded-lg shadow-lg"
           style={{
             backgroundColor: `${notesInfo?.color}90`,
           }}
@@ -198,7 +198,7 @@ function Notebook() {
             theme="snow"
             value={notes}
             onChange={setNotes}
-            className="rounded-lg quill-editor border m-5 border-gray-300"
+            className="rounded-lg quill-editor border m-5 border-gray-300 h-[90vh] overflow-scroll"
             style={{
               color: notesInfo?.color,
               backgroundColor: "black",

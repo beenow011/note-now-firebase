@@ -187,7 +187,7 @@ function Notebook() {
           </div>
         </div>
         <div
-          className="quill-container mt-10 lg:mt-0  p-5 rounded-lg shadow-lg"
+          className="quill-container h-[90vh] overflow-scroll mt-10 lg:mt-0 pb-12 p-5 rounded-lg shadow-lg"
           style={{
             backgroundColor: `${notesInfo?.color}90`,
           }}
@@ -198,7 +198,7 @@ function Notebook() {
             theme="snow"
             value={notes}
             onChange={setNotes}
-            className="rounded-lg quill-editor border border-gray-300"
+            className="rounded-lg quill-editor border m-5 border-gray-300"
             style={{
               color: notesInfo?.color,
               backgroundColor: "black",
@@ -213,6 +213,32 @@ function Notebook() {
             ref={(el) => (quillRef = el)}
           />
         </div>
+        {userStatus && (
+          <div className="flex justify-between mt-8">
+            <div>
+              <button
+                className="px-4 py-2 mr-4 rounded-lg bg-red-500 text-white hover:bg-red-700 transition duration-300"
+                onClick={deleteNotes}
+                disabled={!userStatus}
+              >
+                Delete
+              </button>
+              <button
+                className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-700 transition duration-300"
+                onClick={handleSave}
+                disabled={!userStatus}
+              >
+                Save
+              </button>
+            </div>
+            <button
+              className="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-700 transition duration-300"
+              onClick={handleSaveToDevice}
+            >
+              Download Notes
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
